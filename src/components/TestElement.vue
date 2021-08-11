@@ -26,9 +26,6 @@
         data: function() {
             return {
             }
-        },
-        mounted: function() {
-            console.log("### " + this.text + " ready!");
-        },
+        }
     }
 </script>
