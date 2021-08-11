@@ -206,7 +206,7 @@ export function getStatics(layout: Layout): Array<LayoutItem> {
  * @param  {Boolean}    [isUserAction] If true, designates that the item we're moving is
  *                                     being dragged/resized by th euser.
  */
-export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number, isUserAction: Boolean, preventCollision: Boolean): Layout {
+export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number, isUserAction: Boolean, preventCollision: Boolean, allowOverlay: Boolean): Layout {
   if (l.static) return layout;
 
   // Short-circuit if nothing to do.
@@ -227,6 +227,11 @@ export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number,
   // nearest collision.
   let sorted = sortLayoutItemsByRowCol(layout);
   if (movingUp) sorted = sorted.reverse();
+
+  if(allowOverlay === true) {
+    return layout;
+  }
+
   const collisions = getAllCollisions(sorted, l);
 
   if (preventCollision && collisions.length) {

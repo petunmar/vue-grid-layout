@@ -108,6 +108,10 @@
                 type: Boolean,
                 default: false
             },
+            allowOverlay: {
+                type: Boolean,
+                default: false
+            },
             useStyleCursor: {
                 type: Boolean,
                 default: true
@@ -333,10 +337,12 @@
                 }
 
                 // Move the element to the dragged location.
-                this.layout = moveElement(this.layout, l, x, y, true, this.preventCollision);
-                compact(this.layout, this.verticalCompact);
-                // needed because vue can't detect changes on array element properties
-                this.eventBus.$emit("compact");
+                this.layout = moveElement(this.layout, l, x, y, true, this.preventCollision, this.allowOverlay);
+                if(this.allowOverlay !== true) {
+                    compact(this.layout, this.verticalCompact);
+                    // needed because vue can't detect changes on array element properties
+                    this.eventBus.$emit("compact");
+                }
                 this.updateHeight();
                 if (eventName === 'dragend') this.$emit('layout-updated', this.layout);
             },
@@ -345,6 +351,12 @@
                 //GetLayoutItem sometimes return null object
                 if (l === undefined || l === null){
                     l = {h:0, w:0}
+                }
+
+                if(this.allowOverlay !== true) {
+                    // Set new width and height.
+                    l.w = w;
+                    l.h = h;
                 }
 
                 let hasCollisions;

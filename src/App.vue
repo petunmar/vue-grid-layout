@@ -32,6 +32,8 @@
             <input type="checkbox" v-model="mirrored"/> Mirrored
             <input type="checkbox" v-model="responsive"/> Responsive
             <input type="checkbox" v-model="preventCollision"/> Prevent Collision
+            <input type="checkbox" v-model="allowOverlay"/> Allow Overlay
+            <input type="checkbox" v-model="compact"/> Compact
             <div style="margin-top: 10px;margin-bottom: 10px;">
                 Row Height: <input type="number" v-model="rowHeight"/> Col nums: <input type="number" v-model="colNum"/>
                 Margin x: <input type="number" v-model="marginX"/> Margin y: <input type="number" v-model="marginY"/>
@@ -45,6 +47,7 @@
                     :is-resizable="resizable"
                     :is-mirrored="mirrored"
                     :prevent-collision="preventCollision"
+                    :allow-overlay="allowOverlay"
                     :vertical-compact="compact"
                     :use-css-transforms="true"
                     :responsive="responsive"
@@ -165,6 +168,7 @@
                 mirrored: false,
                 responsive: true,
                 preventCollision: false,
+                allowOverlay: false,
                 compact: true,
                 rowHeight: 30,
                 colNum: 12,
