@@ -3536,6 +3536,9 @@ export type DragCallbackData = {
                   }
               } // Move it down, and keep moving it down if it's colliding.
 
+              if(this.allowOverlay === true) {
+                  return l;
+              }
 
               var collides;
 
