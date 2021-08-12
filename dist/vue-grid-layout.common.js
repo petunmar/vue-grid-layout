@@ -1707,6 +1707,12 @@ module.exports =
                           };
                       }
 
+                      if(this.allowOverlay === true) {
+                          // Set new width and height.
+                          l.w = w;
+                          l.h = h;
+                      }
+
                       var hasCollisions;
 
                       if (this.preventCollision) {
